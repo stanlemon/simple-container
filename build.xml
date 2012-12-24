@@ -115,7 +115,7 @@
 
  <target name="phpunit" description="Run unit tests with PHPUnit">
   <exec executable="phpunit">
-   <arg value="--configuration=${basedir}/phpunit.xml.dist"/>
+   <arg value="--configuration=${basedir}/tests/phpunit.xml.dist"/>
    <arg value="--log-junit=${basedir}/build/logs/junit.xml"/>
    <arg value="--coverage-clover=${basedir}/build/logs/clover.xml"/>
    <arg value="--coverage-html=${basedir}/build/coverage/"/>

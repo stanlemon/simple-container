@@ -1,0 +1,23 @@
+{
+    "name": "stanlemon/simple-container",
+    "type": "library",
+    "description": "SimpleContainer is a simple service container with dependency injection.",
+    "keywords": ["di", "dependency injection", "autowire"],
+    "homepage": "http://stanlemon.net",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stan Lemon",
+            "email": "stosh1985@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "Lemon": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

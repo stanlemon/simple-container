@@ -64,7 +64,7 @@ class SimpleContainer implements \ArrayAccess
      * @param array $params An optional array of parameters to be passed into the constructor of a new instance
      * @return Instance of the class sent in as a parameter
      */
-    public function newInstance($class, array $params = null)
+    public function newInstance($class, array $params = null, array $ignore = array())
     {
         $reflection = new \ReflectionClass($class);
 
@@ -72,7 +72,7 @@ class SimpleContainer implements \ArrayAccess
 
         $obj = call_user_func_array(array($reflection, 'newInstance'), $params);
 
-        $this->injectSetters($reflection, $obj);
+        $this->injectSetters($reflection, $obj, $ignore);
         
         return $obj;
     }
@@ -109,7 +109,7 @@ class SimpleContainer implements \ArrayAccess
      * @param object $obj The object to call setters on
      * @uses get()
      */
-    protected function injectSetters(\ReflectionClass $reflection, $obj)
+    protected function injectSetters(\ReflectionClass $reflection, $obj, array $ignore = array())
     {
         foreach ($reflection->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
             $methodName = $method->getName();
@@ -118,7 +118,8 @@ class SimpleContainer implements \ArrayAccess
 
             if (substr($methodName, 0, 3) == 'set' &&
                 count($params) == 1 &&
-                array_key_exists($serviceName, $this->services)) {
+                array_key_exists($serviceName, $this->services) &&
+				!in_array($serviceName, $ignore) {
 
                 $obj->$methodName(
                     $this->get($serviceName)

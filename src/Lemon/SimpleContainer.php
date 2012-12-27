@@ -119,7 +119,7 @@ class SimpleContainer implements \ArrayAccess
             if (substr($methodName, 0, 3) == 'set' &&
                 count($params) == 1 &&
                 array_key_exists($serviceName, $this->services) &&
-				!in_array($serviceName, $ignore) {
+				!in_array($serviceName, $ignore)) {
 
                 $obj->$methodName(
                     $this->get($serviceName)
